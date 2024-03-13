@@ -15,6 +15,5 @@ for customer in customers:
 cursor.execute('SELECT * FROM customers')
 print(cursor.fetchall())
 
-# שמירת השינויים וסגירת החיבור
 main.conn.commit()
 main.conn.close()
