@@ -1,7 +1,6 @@
 import pymysql
 
 
-# הגדרת החיבור למסד הנתונים
 host = 'localhost'
 user = 'root'
 password = '123456'
@@ -18,4 +17,3 @@ try:
 except pymysql.Error as e:
     print(f"Connection failed: {e}")
 
-# יצירת קורסור לביצוע שאילתות

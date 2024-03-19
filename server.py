@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 import main
 import pymysql
 from flask_cors import CORS
-
+from login import login, register
 app = Flask(__name__)
 CORS(app)
 
@@ -13,7 +13,7 @@ def get_products():
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM products')
         products = cursor.fetchall()
-        conn.close()
+        # conn.close()
 
         formatted_products = []
         for product in products:
@@ -40,7 +40,7 @@ def get_customers():
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM customers')
         customers = cursor.fetchall()
-        conn.close()
+        # conn.close()
 
         formatted_customers = []
         for customer in customers:
@@ -61,5 +61,12 @@ def get_customers():
     else:
         return jsonify({"error": "Failed to connect to database"}), 500
 
+@app.route_route('/login', methods=['POST'])
+def login():
+    return login()
+
+@app.route('/register', methods=['POST'])
+def register_route():
+    return register()
 if __name__ == '__main__':
     app.run(debug=True)
