@@ -61,8 +61,8 @@ def get_customers():
     else:
         return jsonify({"error": "Failed to connect to database"}), 500
 
-@app.route_route('/login', methods=['POST'])
-def login():
+@app.route('/login', methods=['POST'])
+def login_route():
     return login()
 
 @app.route('/register', methods=['POST'])
