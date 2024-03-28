@@ -9,10 +9,8 @@ CORS(app)
 @app.route('/add_customer', methods=['POST'])
 def add_customer():
     if request.method == 'POST':
-        # קבלת הנתונים מהבקשה שהתקבלה מהקליינט
         data = request.json
         
-        # הוספת הלקוח למסד הנתונים
         conn = main.conn
         if conn:
             cursor = conn.cursor()
