@@ -2,26 +2,58 @@ from flask import Flask, request, jsonify
 import main
 import jwt
 from bcrypt import checkpw
+import bcrypt
+from datetime import datetime, timedelta, timezone
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
  
-# ניתן להגדיר מפתח סודי לטוקן
-app.config['SECRET_KEY'] = 'your_secret_key'
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY")
+
+def hash_password(password):
+
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 def register():
     conn = main.conn
     if conn:
-        data = request.get_json()
-        email = data['email']
-        password = data['password']
-        # צור פונקציה שבודקת האם האימייל כבר קיים במסד הנתונים
-        # אם כן, החזר שגיאה או קוד הסטטוס מתאים
+        try:
+            data = request.json
+            email = data.get('email')
+            # Assuming we still want to hash the password before storing
+            password = hash_password(data.get('password'))
+            name = data.get('firstName')
+            last_name = data.get('lastName')
+            address = data.get('address')
+            phone = data.get('phone')
+            print("Received email:", email) 
+            # Simple validation for all fields
+            if not all([email, password, name, last_name, address, phone]):
+                print(email, password, name, last_name, address, phone)
+                return jsonify({"error": "Please fill in all fields"}), 401
 
-        # אם האימייל אינו קיים, הוסף את המשתמש החדש למסד הנתונים ואמת אותו
-        # שלח הודעת JSON עם אישור ההרשמה או הודעת שגיאה במידה והרשמת המשתמש נכשלה
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM customers WHERE email = %s', (email,))
+            existing_user = cursor.fetchone()
+            print("Existing user:", existing_user) 
+            if existing_user:
+             return jsonify({"error": "Email already exists"}), 400
 
+            
+            cursor.execute('INSERT INTO customers (email, password, name, last_name, address, phone) VALUES (%s, %s, %s, %s, %s, %s)', 
+                           (email, password, name, last_name, address, phone))
+            conn.commit()
+            token = create_token(email)
+            print("token",token)
+            return jsonify({'token': token})
+            # return jsonify({"message": "User registered successfully"}), 201
+        except Exception as e:
+            print(f"Error during registration: {e}")
+            return jsonify({"error": "Failed to register user", "details": str(e)}), 500
     else:
-        return jsonify({"error": "Failed to connect to database"}), 500
+        return jsonify({"error": "Failed to connect to the database"}), 500
 
 def login():
     conn = main.conn
@@ -51,7 +83,9 @@ def login():
         return jsonify({"error": "Failed to connect to database"}), 500
 # פונקציה ליצירת טוקן לאימות
 def create_token(email):
-    token = jwt.encode({'email': email}, app.config['SECRET_KEY'])
+    expiration_time = datetime.now(timezone.utc) + timedelta(minutes=30)
+    payload = {'email': email, 'exp': expiration_time}
+    token = jwt.encode(payload, SECRET_KEY)
     return token
 
 if __name__ == '__main__':

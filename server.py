@@ -3,18 +3,17 @@ import main
 import pymysql
 from flask_cors import CORS
 from login import login, register
+from authToken import authenticate_token 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
-@app.route('/products')
+@app.route('/products', methods=['POST'])
 def get_products():
     conn = main.conn
     if conn:
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM products')
         products = cursor.fetchall()
-        # conn.close()
-
         formatted_products = []
         for product in products:
             formatted_product = {
@@ -30,7 +29,7 @@ def get_products():
         return response
 
     else:
-        return jsonify({"error": "Failed to connect to database"}), 500
+        return jsonify({"error": "Failed to connect to the database"}), 500
 
 
 @app.route('/customers')
@@ -68,5 +67,12 @@ def login_route():
 @app.route('/register', methods=['POST'])
 def register_route():
     return register()
+
+@app.route('/authenticate', methods=['POST'])
+def authenticate_route():
+    return authenticate_token()
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
