@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
+from werkzeug.security import generate_password_hash, check_password_hash
 import main
 import jwt
-from bcrypt import checkpw
-import bcrypt
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 import os
+from models import db, Customer
 
 app = Flask(__name__)
  
@@ -13,79 +13,87 @@ load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 def hash_password(password):
-
-    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    return generate_password_hash(password)
 
 def register():
-    conn = main.conn
-    if conn:
-        try:
-            data = request.json
-            email = data.get('email')
-            # Assuming we still want to hash the password before storing
-            password = hash_password(data.get('password'))
-            name = data.get('firstName')
-            last_name = data.get('lastName')
-            address = data.get('address')
-            phone = data.get('phone')
-            print("Received email:", email) 
-            # Simple validation for all fields
-            if not all([email, password, name, last_name, address, phone]):
-                print(email, password, name, last_name, address, phone)
-                return jsonify({"error": "Please fill in all fields"}), 401
+    try:
+        data = request.json
+        email = data.get('email')
+        password = data.get('password')
+        hashed_password = hash_password(password)
+        name = data.get('firstName')
+        last_name = data.get('lastName')
+        address = data.get('address')
+        phone = data.get('phone')
+        
+        print(f"Registering user: {email}")
+        print(f"Hashed password: {hashed_password}")
 
-            cursor = conn.cursor()
-            cursor.execute('SELECT * FROM customers WHERE email = %s', (email,))
-            existing_user = cursor.fetchone()
-            print("Existing user:", existing_user) 
-            if existing_user:
-             return jsonify({"error": "Email already exists"}), 400
+        if not all([email, hashed_password, name, last_name, address, phone]):
+            return jsonify({"error": "Please fill in all fields"}), 401
 
-            
-            cursor.execute('INSERT INTO customers (email, password, name, last_name, address, phone) VALUES (%s, %s, %s, %s, %s, %s)', 
-                           (email, password, name, last_name, address, phone))
-            conn.commit()
-            token = create_token(email)
-            print("token",token)
-            return jsonify({'token': token})
-            # return jsonify({"message": "User registered successfully"}), 201
-        except Exception as e:
-            print(f"Error during registration: {e}")
-            return jsonify({"error": "Failed to register user", "details": str(e)}), 500
-    else:
-        return jsonify({"error": "Failed to connect to the database"}), 500
+        existing_user = Customer.query.filter_by(email=email).first()
+        if existing_user:
+            return jsonify({"error": "Email already exists"}), 400
+        
+        new_customer = Customer(
+            email=email,
+            password=hashed_password,
+            name=name,
+            last_name=last_name,
+            address=address,
+            phone=phone
+        )
+        db.session.add(new_customer)
+        db.session.commit()
+
+        user_data = {
+            'id': new_customer.id,
+            'name': new_customer.name,
+            'last_name': new_customer.last_name,
+            'email': new_customer.email,
+            'phone': new_customer.phone,
+            'address': new_customer.address
+        }
+        print('userdata--- ',new_customer.id)
+        token = create_token(email)
+        return jsonify({'token': token,'userName':new_customer.name,'id_customer':new_customer.id}),200
+
+    except Exception as e:
+        print(f"Error during registration: {e}")
+        return jsonify({"error": "Failed to register user", "details": str(e)}), 500
+
 
 def login():
-    conn = main.conn
-    if conn:
+    try:
         data = request.get_json()
-        if 'email' not in data or 'password' not in data:
-            return jsonify({"error": "Missing email or password in request"}), 400
-        
         email = data['email']
         password = data['password']
         
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM customers WHERE email = %s', (email))
-        user = cursor.fetchone()
-        print(user)
-        if not user:
+        user = Customer.query.filter_by(email=email).first()
+        
+        print(f"Login attempt for user: {email}")
+        
+        if user:
+            print(f"User found: {user.email}, Hashed password: {user.password}")
+            if check_password_hash(user.password, password):
+                token = create_token(email)
+                return jsonify({'token': token, 'id_customer': user.id, 'name': user.name})
+            else:
+                print("Invalid password")
+                return jsonify({"error": "Invalid email or password"}), 401
+        else:
+            print("User not found")
             return jsonify({"error": "User not found"}), 404
 
-        if not checkpw(password.encode('utf-8'), user[6].encode('utf-8')):
-            return jsonify({"error": "Invalid email or password"}), 401
+    except Exception as e:
+        print(f"Error during login: {e}")
+        return jsonify({"error": f"Failed to login: {e}"}), 500
 
-        token = create_token(email)
-        print("token",token)
-        return jsonify({'token': token})
-
-    else:
-        return jsonify({"error": "Failed to connect to database"}), 500
-# פונקציה ליצירת טוקן לאימות
 def create_token(email):
     expiration_time = datetime.now(timezone.utc) + timedelta(minutes=30)
     payload = {'email': email, 'exp': expiration_time}
-    token = jwt.encode(payload, SECRET_KEY)
+    token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
     return token
 
 if __name__ == '__main__':

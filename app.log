@@ -1,0 +1,769 @@
+2024-05-22 00:07:52.451 | DEBUG    | create_order:create_order:31 - Order created successfully
+2024-05-22 00:07:52.452 | ERROR    | create_order:create_order:49 - Error creating order: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+Traceback (most recent call last):
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 973, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x000001223CD35CF0>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 37076)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 1016, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x000001223CD35A20>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 37076)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-3 (process_request_thread), started daemon 37076)>
+    │    │        │    └ (<socket.socket fd=900, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=...
+    │    │        └ <Thread(Thread-3 (process_request_thread), started daemon 37076)>
+    │    └ <bound method ThreadingMixIn.process_request_thread of <werkzeug.serving.ThreadedWSGIServer object at 0x000001223FE7E830>>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 37076)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 683, in process_request_thread
+    self.finish_request(request, client_address)
+    │    │              │        └ ('127.0.0.1', 59803)
+    │    │              └ <socket.socket fd=900, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=(...
+    │    └ <function BaseServer.finish_request at 0x000001223CD376D0>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000001223FE7E830>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    │    │                   │        │               └ <werkzeug.serving.ThreadedWSGIServer object at 0x000001223FE7E830>
+    │    │                   │        └ ('127.0.0.1', 59803)
+    │    │                   └ <socket.socket fd=900, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=(...
+    │    └ <class 'werkzeug.serving.WSGIRequestHandler'>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000001223FE7E830>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 747, in __init__
+    self.handle()
+    │    └ <function WSGIRequestHandler.handle at 0x000001223D116B90>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x000001223FEC8310>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 390, in handle
+    super().handle()
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\http\server.py", line 433, in handle
+    self.handle_one_request()
+    │    └ <function BaseHTTPRequestHandler.handle_one_request at 0x000001223CF5C4C0>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x000001223FEC8310>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\http\server.py", line 421, in handle_one_request
+    method()
+    └ <bound method WSGIRequestHandler.run_wsgi of <werkzeug.serving.WSGIRequestHandler object at 0x000001223FEC8310>>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 362, in run_wsgi
+    execute(self.server.app)
+    │       │    │      └ <werkzeug.debug.DebuggedApplication object at 0x000001223C73FA30>
+    │       │    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000001223FE7E830>
+    │       └ <werkzeug.serving.WSGIRequestHandler object at 0x000001223FEC8310>
+    └ <function WSGIRequestHandler.run_wsgi.<locals>.execute at 0x000001223FEA68C0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 325, in execute
+    for data in application_iter:
+                └ <generator object DebuggedApplication.debug_application at 0x000001223FE98DD0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\debug\__init__.py", line 330, in debug_application
+    app_iter = self.app(environ, start_response)
+               │    │   │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x000001223FEA6830>
+               │    │   └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=900>, 'wsgi.errors': <_io.TextIOWr...
+               │    └ <Flask 'main'>
+               └ <werkzeug.debug.DebuggedApplication object at 0x000001223C73FA30>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 1488, in __call__
+    return self.wsgi_app(environ, start_response)
+           │    │        │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x000001223FEA6830>
+           │    │        └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=900>, 'wsgi.errors': <_io.TextIOWr...
+           │    └ <function Flask.wsgi_app at 0x000001223DA9C790>
+           └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               │    └ <function Flask.full_dispatch_request at 0x000001223DA7BF40>
+               └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         │    └ <function Flask.dispatch_request at 0x000001223DA7BEB0>
+         └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           │    │           │    │              │    │            └ {}
+           │    │           │    │              │    └ 'create_order_route'
+           │    │           │    │              └ <Rule '/create_order' (POST, OPTIONS) -> create_order_route>
+           │    │           │    └ {'static': <function Flask.__init__.<locals>.<lambda> at 0x000001223FC4F130>, 'get_products': <function get_products at 0x000...
+           │    │           └ <Flask 'main'>
+           │    └ <function Flask.ensure_sync at 0x000001223DA9C160>
+           └ <Flask 'main'>
+
+  File "D:\newStore\server\server.py", line 76, in create_order_route
+    return create_order()
+           └ <function create_order at 0x000001223FE62B00>
+
+> File "D:\newStore\server\create_order.py", line 32, in create_order
+    db.session.flush()
+    │  │       └ <function scoped_session.flush at 0x000001223F993640>
+    │  └ <sqlalchemy.orm.scoping.scoped_session object at 0x000001223FE562F0>
+    └ <unprintable SQLAlchemy object>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\scoping.py", line 937, in flush
+    return self._proxied.flush(objects=objects)
+           │    │                      └ None
+           │    └ <property object at 0x000001223F99B420>
+           └ <sqlalchemy.orm.scoping.scoped_session object at 0x000001223FE562F0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4341, in flush
+    self._flush(objects)
+    │    │      └ None
+    │    └ <function Session._flush at 0x000001223F916F80>
+    └ <sqlalchemy.orm.session.Session object at 0x000001223FEC8DF0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4476, in _flush
+    with util.safe_reraise():
+         │    └ <class 'sqlalchemy.util.langhelpers.safe_reraise'>
+         └ <module 'sqlalchemy.util' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\__init__.py'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+          │         │              └ <traceback object at 0x000001223FEFA380>
+          │         └ <method 'with_traceback' of 'BaseException' objects>
+          └ RuntimeError("The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or ...
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4437, in _flush
+    flush_context.execute()
+    │             └ <function UOWTransaction.execute at 0x000001223F8FD120>
+    └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000001223FEC8730>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    │   │       └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000001223FEC8730>
+    │   └ <function SaveUpdateAll.execute at 0x000001223F8FDA20>
+    └ SaveUpdateAll(Mapper[Order(orders)])
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    │    │         │               └ <function save_obj at 0x000001223F897C70>
+    │    │         └ <module 'sqlalchemy.orm.persistence' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\orm\\persistence.py'>
+    │    └ <module 'sqlalchemy.util.preloaded' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\preloaded.py'>
+    └ <module 'sqlalchemy.util' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\__init__.py'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 60, in save_obj
+    for (
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 223, in _organize_states_for_save
+    for state, dict_, mapper, connection in _connections_for_states(
+                                            └ <function _connections_for_states at 0x000001223F8ECC10>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1753, in _connections_for_states
+    connection = uowtransaction.transaction.connection(base_mapper)
+                 │              │           │          └ <Mapper at 0x1223fc88af0; Order>
+                 │              │           └ <function SessionTransaction.connection at 0x000001223F8FF880>
+                 │              └ <sqlalchemy.orm.session.SessionTransaction object at 0x000001223FEF9D40>
+                 └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000001223FEC8730>
+
+  File "<string>", line 2, in connection
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                │  │      │      └ {'execution_options': None}
+                │  │      └ (<Mapper at 0x1223fc88af0; Order>,)
+                │  └ <sqlalchemy.orm.session.SessionTransaction object at 0x000001223FEF9D40>
+                └ <function SessionTransaction.connection at 0x000001223F8FF7F0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 1038, in connection
+    bind = self.session.get_bind(bindkey, **kwargs)
+           │    │       │        │          └ {}
+           │    │       │        └ <Mapper at 0x1223fc88af0; Order>
+           │    │       └ <function Session.get_bind at 0x000001223F9D17E0>
+           │    └ <sqlalchemy.orm.session.Session object at 0x000001223FEC8DF0>
+           └ <sqlalchemy.orm.session.SessionTransaction object at 0x000001223FEF9D40>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask_sqlalchemy\session.py", line 53, in get_bind
+    engines = self._db.engines
+              │    │   └ <property object at 0x000001223F9D5990>
+              │    └ <unprintable SQLAlchemy object>
+              └ <sqlalchemy.orm.session.Session object at 0x000001223FEC8DF0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask_sqlalchemy\extension.py", line 690, in engines
+    raise RuntimeError(
+
+RuntimeError: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+2024-05-22 00:11:02.874 | DEBUG    | create_order:create_order:31 - Order created successfully
+2024-05-22 00:11:02.875 | ERROR    | create_order:create_order:49 - Error creating order: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+Traceback (most recent call last):
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 973, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x0000024857805CF0>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 32048)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 1016, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x0000024857805A20>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 32048)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-3 (process_request_thread), started daemon 32048)>
+    │    │        │    └ (<socket.socket fd=704, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=...
+    │    │        └ <Thread(Thread-3 (process_request_thread), started daemon 32048)>
+    │    └ <bound method ThreadingMixIn.process_request_thread of <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 32048)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 683, in process_request_thread
+    self.finish_request(request, client_address)
+    │    │              │        └ ('127.0.0.1', 59945)
+    │    │              └ <socket.socket fd=704, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=(...
+    │    └ <function BaseServer.finish_request at 0x00000248578076D0>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    │    │                   │        │               └ <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>
+    │    │                   │        └ ('127.0.0.1', 59945)
+    │    │                   └ <socket.socket fd=704, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=(...
+    │    └ <class 'werkzeug.serving.WSGIRequestHandler'>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 747, in __init__
+    self.handle()
+    │    └ <function WSGIRequestHandler.handle at 0x0000024857B96B90>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x000002485A8C82B0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 390, in handle
+    super().handle()
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\http\server.py", line 433, in handle
+    self.handle_one_request()
+    │    └ <function BaseHTTPRequestHandler.handle_one_request at 0x0000024857A0C4C0>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x000002485A8C82B0>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\http\server.py", line 421, in handle_one_request
+    method()
+    └ <bound method WSGIRequestHandler.run_wsgi of <werkzeug.serving.WSGIRequestHandler object at 0x000002485A8C82B0>>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 362, in run_wsgi
+    execute(self.server.app)
+    │       │    │      └ <werkzeug.debug.DebuggedApplication object at 0x000002485716FA30>
+    │       │    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>
+    │       └ <werkzeug.serving.WSGIRequestHandler object at 0x000002485A8C82B0>
+    └ <function WSGIRequestHandler.run_wsgi.<locals>.execute at 0x000002485A8A68C0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 325, in execute
+    for data in application_iter:
+                └ <generator object DebuggedApplication.debug_application at 0x000002485A898E40>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\debug\__init__.py", line 330, in debug_application
+    app_iter = self.app(environ, start_response)
+               │    │   │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x000002485A8A6830>
+               │    │   └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=704>, 'wsgi.errors': <_io.TextIOWr...
+               │    └ <Flask 'main'>
+               └ <werkzeug.debug.DebuggedApplication object at 0x000002485716FA30>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 1488, in __call__
+    return self.wsgi_app(environ, start_response)
+           │    │        │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x000002485A8A6830>
+           │    │        └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=704>, 'wsgi.errors': <_io.TextIOWr...
+           │    └ <function Flask.wsgi_app at 0x000002485949C790>
+           └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               │    └ <function Flask.full_dispatch_request at 0x000002485947BF40>
+               └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         │    └ <function Flask.dispatch_request at 0x000002485947BEB0>
+         └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           │    │           │    │              │    │            └ {}
+           │    │           │    │              │    └ 'create_order_route'
+           │    │           │    │              └ <Rule '/create_order' (POST, OPTIONS) -> create_order_route>
+           │    │           │    └ {'static': <function Flask.__init__.<locals>.<lambda> at 0x000002485A64F130>, 'get_products': <function get_products at 0x000...
+           │    │           └ <Flask 'main'>
+           │    └ <function Flask.ensure_sync at 0x000002485949C160>
+           └ <Flask 'main'>
+
+  File "D:\newStore\server\server.py", line 76, in create_order_route
+    return create_order()
+           └ <function create_order at 0x000002485A862B00>
+
+> File "D:\newStore\server\create_order.py", line 32, in create_order
+    db.session.flush()
+    │  │       └ <function scoped_session.flush at 0x000002485A393640>
+    │  └ <sqlalchemy.orm.scoping.scoped_session object at 0x000002485A856320>
+    └ <unprintable SQLAlchemy object>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\scoping.py", line 937, in flush
+    return self._proxied.flush(objects=objects)
+           │    │                      └ None
+           │    └ <property object at 0x000002485A39B2E0>
+           └ <sqlalchemy.orm.scoping.scoped_session object at 0x000002485A856320>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4341, in flush
+    self._flush(objects)
+    │    │      └ None
+    │    └ <function Session._flush at 0x000002485A312F80>
+    └ <sqlalchemy.orm.session.Session object at 0x000002485A8C8D60>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4476, in _flush
+    with util.safe_reraise():
+         │    └ <class 'sqlalchemy.util.langhelpers.safe_reraise'>
+         └ <module 'sqlalchemy.util' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\__init__.py'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+          │         │              └ <traceback object at 0x000002485A8F7040>
+          │         └ <method 'with_traceback' of 'BaseException' objects>
+          └ RuntimeError("The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or ...
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4437, in _flush
+    flush_context.execute()
+    │             └ <function UOWTransaction.execute at 0x000002485A2FD120>
+    └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000002485A8C9120>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    │   │       └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000002485A8C9120>
+    │   └ <function SaveUpdateAll.execute at 0x000002485A2FDA20>
+    └ SaveUpdateAll(Mapper[Order(orders)])
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    │    │         │               └ <function save_obj at 0x000002485A297C70>
+    │    │         └ <module 'sqlalchemy.orm.persistence' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\orm\\persistence.py'>
+    │    └ <module 'sqlalchemy.util.preloaded' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\preloaded.py'>
+    └ <module 'sqlalchemy.util' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\__init__.py'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 60, in save_obj
+    for (
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 223, in _organize_states_for_save
+    for state, dict_, mapper, connection in _connections_for_states(
+                                            └ <function _connections_for_states at 0x000002485A2E8C10>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1753, in _connections_for_states
+    connection = uowtransaction.transaction.connection(base_mapper)
+                 │              │           │          └ <Mapper at 0x2485a688af0; Order>
+                 │              │           └ <function SessionTransaction.connection at 0x000002485A2FF880>
+                 │              └ <sqlalchemy.orm.session.SessionTransaction object at 0x000002485A8F6240>
+                 └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000002485A8C9120>
+
+  File "<string>", line 2, in connection
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                │  │      │      └ {'execution_options': None}
+                │  │      └ (<Mapper at 0x2485a688af0; Order>,)
+                │  └ <sqlalchemy.orm.session.SessionTransaction object at 0x000002485A8F6240>
+                └ <function SessionTransaction.connection at 0x000002485A2FF7F0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 1038, in connection
+    bind = self.session.get_bind(bindkey, **kwargs)
+           │    │       │        │          └ {}
+           │    │       │        └ <Mapper at 0x2485a688af0; Order>
+           │    │       └ <function Session.get_bind at 0x000002485A3D17E0>
+           │    └ <sqlalchemy.orm.session.Session object at 0x000002485A8C8D60>
+           └ <sqlalchemy.orm.session.SessionTransaction object at 0x000002485A8F6240>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask_sqlalchemy\session.py", line 53, in get_bind
+    engines = self._db.engines
+              │    │   └ <property object at 0x000002485A3D5760>
+              │    └ <unprintable SQLAlchemy object>
+              └ <sqlalchemy.orm.session.Session object at 0x000002485A8C8D60>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask_sqlalchemy\extension.py", line 690, in engines
+    raise RuntimeError(
+
+RuntimeError: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+2024-05-22 12:54:30.926 | DEBUG    | create_order:create_order:31 - Order created successfully
+2024-05-22 12:54:30.927 | ERROR    | create_order:create_order:49 - Error creating order: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+Traceback (most recent call last):
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 973, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x0000024857805CF0>
+    └ <Thread(Thread-16 (process_request_thread), started daemon 32120)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 1016, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x0000024857805A20>
+    └ <Thread(Thread-16 (process_request_thread), started daemon 32120)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-16 (process_request_thread), started daemon 32120)>
+    │    │        │    └ (<socket.socket fd=1448, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr...
+    │    │        └ <Thread(Thread-16 (process_request_thread), started daemon 32120)>
+    │    └ <bound method ThreadingMixIn.process_request_thread of <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>>
+    └ <Thread(Thread-16 (process_request_thread), started daemon 32120)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 683, in process_request_thread
+    self.finish_request(request, client_address)
+    │    │              │        └ ('127.0.0.1', 1220)
+    │    │              └ <socket.socket fd=1448, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=...
+    │    └ <function BaseServer.finish_request at 0x00000248578076D0>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    │    │                   │        │               └ <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>
+    │    │                   │        └ ('127.0.0.1', 1220)
+    │    │                   └ <socket.socket fd=1448, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=...
+    │    └ <class 'werkzeug.serving.WSGIRequestHandler'>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 747, in __init__
+    self.handle()
+    │    └ <function WSGIRequestHandler.handle at 0x0000024857B96B90>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x000002485ACCD3C0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 390, in handle
+    super().handle()
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\http\server.py", line 433, in handle
+    self.handle_one_request()
+    │    └ <function BaseHTTPRequestHandler.handle_one_request at 0x0000024857A0C4C0>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x000002485ACCD3C0>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\http\server.py", line 421, in handle_one_request
+    method()
+    └ <bound method WSGIRequestHandler.run_wsgi of <werkzeug.serving.WSGIRequestHandler object at 0x000002485ACCD3C0>>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 362, in run_wsgi
+    execute(self.server.app)
+    │       │    │      └ <werkzeug.debug.DebuggedApplication object at 0x000002485716FA30>
+    │       │    └ <werkzeug.serving.ThreadedWSGIServer object at 0x000002485A87E860>
+    │       └ <werkzeug.serving.WSGIRequestHandler object at 0x000002485ACCD3C0>
+    └ <function WSGIRequestHandler.run_wsgi.<locals>.execute at 0x000002485A8A6CB0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 325, in execute
+    for data in application_iter:
+                └ <generator object DebuggedApplication.debug_application at 0x000002485AC91460>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\debug\__init__.py", line 330, in debug_application
+    app_iter = self.app(environ, start_response)
+               │    │   │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x000002485A8A68C0>
+               │    │   └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=1448>, 'wsgi.errors': <_io.TextIOW...
+               │    └ <Flask 'main'>
+               └ <werkzeug.debug.DebuggedApplication object at 0x000002485716FA30>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 1488, in __call__
+    return self.wsgi_app(environ, start_response)
+           │    │        │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x000002485A8A68C0>
+           │    │        └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=1448>, 'wsgi.errors': <_io.TextIOW...
+           │    └ <function Flask.wsgi_app at 0x000002485949C790>
+           └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               │    └ <function Flask.full_dispatch_request at 0x000002485947BF40>
+               └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         │    └ <function Flask.dispatch_request at 0x000002485947BEB0>
+         └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           │    │           │    │              │    │            └ {}
+           │    │           │    │              │    └ 'create_order_route'
+           │    │           │    │              └ <Rule '/create_order' (POST, OPTIONS) -> create_order_route>
+           │    │           │    └ {'static': <function Flask.__init__.<locals>.<lambda> at 0x000002485A64F130>, 'get_products': <function get_products at 0x000...
+           │    │           └ <Flask 'main'>
+           │    └ <function Flask.ensure_sync at 0x000002485949C160>
+           └ <Flask 'main'>
+
+  File "D:\newStore\server\server.py", line 76, in create_order_route
+    return create_order()
+           └ <function create_order at 0x000002485A862B00>
+
+> File "D:\newStore\server\create_order.py", line 32, in create_order
+    db.session.flush()
+    │  │       └ <function scoped_session.flush at 0x000002485A393640>
+    │  └ <sqlalchemy.orm.scoping.scoped_session object at 0x000002485A856320>
+    └ <unprintable SQLAlchemy object>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\scoping.py", line 937, in flush
+    return self._proxied.flush(objects=objects)
+           │    │                      └ None
+           │    └ <property object at 0x000002485A39B2E0>
+           └ <sqlalchemy.orm.scoping.scoped_session object at 0x000002485A856320>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4341, in flush
+    self._flush(objects)
+    │    │      └ None
+    │    └ <function Session._flush at 0x000002485A312F80>
+    └ <sqlalchemy.orm.session.Session object at 0x000002485ACCC610>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4476, in _flush
+    with util.safe_reraise():
+         │    └ <class 'sqlalchemy.util.langhelpers.safe_reraise'>
+         └ <module 'sqlalchemy.util' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\__init__.py'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+          │         │              └ <traceback object at 0x000002485ACD1740>
+          │         └ <method 'with_traceback' of 'BaseException' objects>
+          └ RuntimeError("The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or ...
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4437, in _flush
+    flush_context.execute()
+    │             └ <function UOWTransaction.execute at 0x000002485A2FD120>
+    └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000002485A8C8370>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    │   │       └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000002485A8C8370>
+    │   └ <function SaveUpdateAll.execute at 0x000002485A2FDA20>
+    └ SaveUpdateAll(Mapper[Order(orders)])
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    │    │         │               └ <function save_obj at 0x000002485A297C70>
+    │    │         └ <module 'sqlalchemy.orm.persistence' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\orm\\persistence.py'>
+    │    └ <module 'sqlalchemy.util.preloaded' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\preloaded.py'>
+    └ <module 'sqlalchemy.util' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\__init__.py'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 60, in save_obj
+    for (
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 223, in _organize_states_for_save
+    for state, dict_, mapper, connection in _connections_for_states(
+                                            └ <function _connections_for_states at 0x000002485A2E8C10>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1753, in _connections_for_states
+    connection = uowtransaction.transaction.connection(base_mapper)
+                 │              │           │          └ <Mapper at 0x2485a688af0; Order>
+                 │              │           └ <function SessionTransaction.connection at 0x000002485A2FF880>
+                 │              └ <sqlalchemy.orm.session.SessionTransaction object at 0x000002485ACB8740>
+                 └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x000002485A8C8370>
+
+  File "<string>", line 2, in connection
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                │  │      │      └ {'execution_options': None}
+                │  │      └ (<Mapper at 0x2485a688af0; Order>,)
+                │  └ <sqlalchemy.orm.session.SessionTransaction object at 0x000002485ACB8740>
+                └ <function SessionTransaction.connection at 0x000002485A2FF7F0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 1038, in connection
+    bind = self.session.get_bind(bindkey, **kwargs)
+           │    │       │        │          └ {}
+           │    │       │        └ <Mapper at 0x2485a688af0; Order>
+           │    │       └ <function Session.get_bind at 0x000002485A3D17E0>
+           │    └ <sqlalchemy.orm.session.Session object at 0x000002485ACCC610>
+           └ <sqlalchemy.orm.session.SessionTransaction object at 0x000002485ACB8740>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask_sqlalchemy\session.py", line 53, in get_bind
+    engines = self._db.engines
+              │    │   └ <property object at 0x000002485A3D5760>
+              │    └ <unprintable SQLAlchemy object>
+              └ <sqlalchemy.orm.session.Session object at 0x000002485ACCC610>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask_sqlalchemy\extension.py", line 690, in engines
+    raise RuntimeError(
+
+RuntimeError: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+2024-05-22 12:57:20.765 | DEBUG    | create_order:create_order:31 - Order created successfully
+2024-05-22 12:57:20.766 | ERROR    | create_order:create_order:49 - Error creating order: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+Traceback (most recent call last):
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 973, in _bootstrap
+    self._bootstrap_inner()
+    │    └ <function Thread._bootstrap_inner at 0x0000019C63C05CF0>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 36880)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 1016, in _bootstrap_inner
+    self.run()
+    │    └ <function Thread.run at 0x0000019C63C05A20>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 36880)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Thread(Thread-3 (process_request_thread), started daemon 36880)>
+    │    │        │    └ (<socket.socket fd=1240, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr...
+    │    │        └ <Thread(Thread-3 (process_request_thread), started daemon 36880)>
+    │    └ <bound method ThreadingMixIn.process_request_thread of <werkzeug.serving.ThreadedWSGIServer object at 0x0000019C66C7E770>>
+    └ <Thread(Thread-3 (process_request_thread), started daemon 36880)>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 683, in process_request_thread
+    self.finish_request(request, client_address)
+    │    │              │        └ ('127.0.0.1', 1387)
+    │    │              └ <socket.socket fd=1240, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=...
+    │    └ <function BaseServer.finish_request at 0x0000019C63C076D0>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x0000019C66C7E770>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 360, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+    │    │                   │        │               └ <werkzeug.serving.ThreadedWSGIServer object at 0x0000019C66C7E770>
+    │    │                   │        └ ('127.0.0.1', 1387)
+    │    │                   └ <socket.socket fd=1240, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 5000), raddr=...
+    │    └ <class 'werkzeug.serving.WSGIRequestHandler'>
+    └ <werkzeug.serving.ThreadedWSGIServer object at 0x0000019C66C7E770>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\socketserver.py", line 747, in __init__
+    self.handle()
+    │    └ <function WSGIRequestHandler.handle at 0x0000019C63F96B90>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x0000019C66CC8250>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 390, in handle
+    super().handle()
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\http\server.py", line 433, in handle
+    self.handle_one_request()
+    │    └ <function BaseHTTPRequestHandler.handle_one_request at 0x0000019C63E0C4C0>
+    └ <werkzeug.serving.WSGIRequestHandler object at 0x0000019C66CC8250>
+
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\http\server.py", line 421, in handle_one_request
+    method()
+    └ <bound method WSGIRequestHandler.run_wsgi of <werkzeug.serving.WSGIRequestHandler object at 0x0000019C66CC8250>>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 362, in run_wsgi
+    execute(self.server.app)
+    │       │    │      └ <werkzeug.debug.DebuggedApplication object at 0x0000019C6355FA30>
+    │       │    └ <werkzeug.serving.ThreadedWSGIServer object at 0x0000019C66C7E770>
+    │       └ <werkzeug.serving.WSGIRequestHandler object at 0x0000019C66CC8250>
+    └ <function WSGIRequestHandler.run_wsgi.<locals>.execute at 0x0000019C66CA28C0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\serving.py", line 325, in execute
+    for data in application_iter:
+                └ <generator object DebuggedApplication.debug_application at 0x0000019C66C94DD0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\werkzeug\debug\__init__.py", line 330, in debug_application
+    app_iter = self.app(environ, start_response)
+               │    │   │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x0000019C66CA2830>
+               │    │   └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=1240>, 'wsgi.errors': <_io.TextIOW...
+               │    └ <Flask 'main'>
+               └ <werkzeug.debug.DebuggedApplication object at 0x0000019C6355FA30>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 1488, in __call__
+    return self.wsgi_app(environ, start_response)
+           │    │        │        └ <function WSGIRequestHandler.run_wsgi.<locals>.start_response at 0x0000019C66CA2830>
+           │    │        └ {'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BufferedReader name=1240>, 'wsgi.errors': <_io.TextIOW...
+           │    └ <function Flask.wsgi_app at 0x0000019C6489C790>
+           └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               │    └ <function Flask.full_dispatch_request at 0x0000019C6487BF40>
+               └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         │    └ <function Flask.dispatch_request at 0x0000019C6487BEB0>
+         └ <Flask 'main'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           │    │           │    │              │    │            └ {}
+           │    │           │    │              │    └ 'create_order_route'
+           │    │           │    │              └ <Rule '/create_order' (POST, OPTIONS) -> create_order_route>
+           │    │           │    └ {'static': <function Flask.__init__.<locals>.<lambda> at 0x0000019C66A4F130>, 'get_products': <function get_products at 0x000...
+           │    │           └ <Flask 'main'>
+           │    └ <function Flask.ensure_sync at 0x0000019C6489C160>
+           └ <Flask 'main'>
+
+  File "D:\newStore\server\server.py", line 75, in create_order_route
+    return create_order()
+           └ <function create_order at 0x0000019C66C62B00>
+
+> File "D:\newStore\server\create_order.py", line 32, in create_order
+    db.session.flush()
+    │  │       └ <function scoped_session.flush at 0x0000019C66793640>
+    │  └ <sqlalchemy.orm.scoping.scoped_session object at 0x0000019C66C56260>
+    └ <unprintable SQLAlchemy object>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\scoping.py", line 937, in flush
+    return self._proxied.flush(objects=objects)
+           │    │                      └ None
+           │    └ <property object at 0x0000019C6679B420>
+           └ <sqlalchemy.orm.scoping.scoped_session object at 0x0000019C66C56260>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4341, in flush
+    self._flush(objects)
+    │    │      └ None
+    │    └ <function Session._flush at 0x0000019C66716F80>
+    └ <sqlalchemy.orm.session.Session object at 0x0000019C66CC8D30>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4476, in _flush
+    with util.safe_reraise():
+         │    └ <class 'sqlalchemy.util.langhelpers.safe_reraise'>
+         └ <module 'sqlalchemy.util' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\__init__.py'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+          │         │              └ <traceback object at 0x0000019C66CFA2C0>
+          │         └ <method 'with_traceback' of 'BaseException' objects>
+          └ RuntimeError("The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or ...
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 4437, in _flush
+    flush_context.execute()
+    │             └ <function UOWTransaction.execute at 0x0000019C666FD120>
+    └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x0000019C66CC8580>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+    │   │       └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x0000019C66CC8580>
+    │   └ <function SaveUpdateAll.execute at 0x0000019C666FDA20>
+    └ SaveUpdateAll(Mapper[Order(orders)])
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+    │    │         │               └ <function save_obj at 0x0000019C66697C70>
+    │    │         └ <module 'sqlalchemy.orm.persistence' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\orm\\persistence.py'>
+    │    └ <module 'sqlalchemy.util.preloaded' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\preloaded.py'>
+    └ <module 'sqlalchemy.util' from 'D:\\newStore\\server\\myenv\\lib\\site-packages\\sqlalchemy\\util\\__init__.py'>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 60, in save_obj
+    for (
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 223, in _organize_states_for_save
+    for state, dict_, mapper, connection in _connections_for_states(
+                                            └ <function _connections_for_states at 0x0000019C666ECC10>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1753, in _connections_for_states
+    connection = uowtransaction.transaction.connection(base_mapper)
+                 │              │           │          └ <Mapper at 0x19c66a88a60; Order>
+                 │              │           └ <function SessionTransaction.connection at 0x0000019C666FF880>
+                 │              └ <sqlalchemy.orm.session.SessionTransaction object at 0x0000019C66CF9C40>
+                 └ <sqlalchemy.orm.unitofwork.UOWTransaction object at 0x0000019C66CC8580>
+
+  File "<string>", line 2, in connection
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                │  │      │      └ {'execution_options': None}
+                │  │      └ (<Mapper at 0x19c66a88a60; Order>,)
+                │  └ <sqlalchemy.orm.session.SessionTransaction object at 0x0000019C66CF9C40>
+                └ <function SessionTransaction.connection at 0x0000019C666FF7F0>
+
+  File "D:\newStore\server\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 1038, in connection
+    bind = self.session.get_bind(bindkey, **kwargs)
+           │    │       │        │          └ {}
+           │    │       │        └ <Mapper at 0x19c66a88a60; Order>
+           │    │       └ <function Session.get_bind at 0x0000019C667D17E0>
+           │    └ <sqlalchemy.orm.session.Session object at 0x0000019C66CC8D30>
+           └ <sqlalchemy.orm.session.SessionTransaction object at 0x0000019C66CF9C40>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask_sqlalchemy\session.py", line 53, in get_bind
+    engines = self._db.engines
+              │    │   └ <property object at 0x0000019C667D5990>
+              │    └ <unprintable SQLAlchemy object>
+              └ <sqlalchemy.orm.session.Session object at 0x0000019C66CC8D30>
+
+  File "D:\newStore\server\myenv\lib\site-packages\flask_sqlalchemy\extension.py", line 690, in engines
+    raise RuntimeError(
+
+RuntimeError: The current Flask app is not registered with this 'SQLAlchemy' instance. Did you forget to call 'init_app', or did you create multiple 'SQLAlchemy' instances?
+2024-05-22 12:58:56.773 | DEBUG    | create_order:create_order:31 - Order created successfully
