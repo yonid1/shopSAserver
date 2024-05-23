@@ -5,9 +5,7 @@ import pymysql.cursors
 
 cursor = main.conn.cursor()
 
-# פונקציה להצפנת הסיסמה
 def hash_password(password):
-    # מקבלים את הסיסמה ומחזירים אותה מוצפנת
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 customers = [
